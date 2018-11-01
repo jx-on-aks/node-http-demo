@@ -1,21 +1,20 @@
+var express = require('express');
+var app = express();
 
-var http = require('http');
-var fileSystem = require('fs');
-
-var server = http.createServer(function(req, resp){
-	fileSystem.readFile('./index.html', function(error, fileContent){
-		if(error){
-			resp.writeHead(500, {'Content-Type': 'text/plain'});
-			resp.end('Error');
-		}
-		else{
-			resp.writeHead(200, {'Content-Type': 'text/html'});
-			resp.write(fileContent);
-			resp.end();
-		}
-	});
+app.get('/', function (req, res) {
+    res.send('Hello from mywebapi');
 });
 
-server.listen(8080);
+var port = 80;
+var server = app.listen(port, function () {
+    console.log('Listening on port ' + port);
+});
 
+process.on("SIGINT", () => {
+    process.exit(130 /* 128 + SIGINT */);
+});
 
+process.on("SIGTERM", () => {
+    console.log("Terminating...");
+    server.close();
+});
