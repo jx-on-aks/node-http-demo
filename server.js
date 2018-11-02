@@ -2,10 +2,10 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello from mywebapi');
+    res.send('Hello from webapi');
 });
 
-var port = 8080;
+var port = 80;
 var server = app.listen(port, function () {
     console.log('Listening on port ' + port);
 });
