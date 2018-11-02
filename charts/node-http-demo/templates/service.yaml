@@ -1,23 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-{{- if .Values.service.name }}
-  name: {{ .Values.service.name }}
-{{- else }}
-  name: {{ template "fullname" . }}
-{{- end }}
+  name: {{ template "node-http-demo.fullname" . }}
   labels:
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-{{- if .Values.service.annotations }}
-  annotations:
-{{ toYaml .Values.service.annotations | indent 4 }}
-{{- end }}
+    app: {{ template "node-http-demo.name" . }}
+    chart: {{ template "node-http-demo.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: {{ .Values.service.externalPort }}
-    targetPort: {{ .Values.service.internalPort }}
-    protocol: TCP
-    name: http
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
-    app: {{ template "fullname" . }}
+    app: {{ template "node-http-demo.name" . }}
+    release: {{ .Release.Name }}
