@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello from mywebapi');
+    res.send('Hello from my webapi');
 });
 
 var port = 8080;
