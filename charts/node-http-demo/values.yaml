@@ -4,8 +4,8 @@
 fullnameOverride: node-http-demo
 replicaCount: 1
 image:
-  repository: node-http-demo
-  tag: stable
+  repository: jenkinsx.azurecr.io/yuwzho/node-http-demo
+  tag: 0.0.10
   pullPolicy: IfNotPresent
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
